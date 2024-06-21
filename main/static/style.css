@@ -1,0 +1,53 @@
+/* main/static/main/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
+}
+
+.login {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.functions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.function {
+    background-color: #e0e0e0;
+    padding: 20px;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+<!-- main/templates/main/base.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Portal</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'function1' %}">Function1</a></li>
+                <li><a href="{% url 'function2' %}">Function2</a></li>
+                <li><a href="{% url 'function3' %}">Function3</a></li>
+                <li><a href="{% url 'function4' %}">Function4</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <!-- 로그인 폼 추가 -->
+        </div>
+    </div>
+</body>
+</html>
