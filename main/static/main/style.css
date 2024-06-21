@@ -48,10 +48,27 @@ nav ul.navbar li a:hover {
     margin: 20px;
 }
 
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
 .content {
-    flex: 2;
+    flex: 3;
     padding: 20px;
     background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login {
+    flex: 1;
+    padding: 20px;
+    background-color: #e0e0e0;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
@@ -63,6 +80,7 @@ nav ul.navbar li a:hover {
     padding: 20px;
     border-radius: 10px;
     background-color: #f9f9f9;
+    height: auto; /* 세로로 길게 설정 */
 }
 
 .board h2 {
