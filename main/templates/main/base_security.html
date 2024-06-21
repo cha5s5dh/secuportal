@@ -1,33 +1,17 @@
-<!-- main/templates/main/base_security.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>보안정보</title>
+    <title>정보보안 포털</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
 </head>
 <body>
     <header>
-        <h1>보안정보 포털</h1>
-        <nav>
-            <ul class="navbar">
-                <li><a href="{% url 'home' %}">홈</a></li>
-                <li><a href="{% url 'security_info' %}">보안정보</a></li>
-                <li><a href="{% url 'function2' %}">기능2</a></li>
-                <li><a href="{% url 'function3' %}">기능3</a></li>
-                <li><a href="{% url 'function4' %}">기능4</a></li>
-            </ul>
-        </nav>
+        <h1>정보보안 포털</h1>
+        {% include 'main/navbar.html' %}
     </header>
     <div class="container">
-        <div class="content">
-            {% block content %}{% endblock %}
-        </div>
+        {% block content %}{% endblock %}
     </div>
-    {% block additional_content %}
-    <div class="additional-content">
-        <!-- 추가 콘텐츠 영역 -->
-    </div>
-    {% endblock %}
 </body>
 </html>

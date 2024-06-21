@@ -1,5 +1,4 @@
-/* main/static/main/style.css */
-
+/* 기본 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -43,14 +42,16 @@ nav ul.navbar li a:hover {
     background-color: #555;
 }
 
-.container {
+/* 메인 컨테이너 */
+.main-container {
     display: flex;
     margin: 20px;
     height: calc(100vh - 60px); /* 헤더를 제외한 화면 높이 */
 }
 
+/* 콘텐츠 */
 .content {
-    flex: 3;
+    flex: 5; /* 50% 비중 */
     padding: 20px;
     background-color: white;
     border: 1px solid #ddd;
@@ -59,24 +60,42 @@ nav ul.navbar li a:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
+    gap: 20px; /* 각 영역 사이에 공백 추가 */
 }
 
-.grid-item {
-    background-color: #f9f9f9;
+/* 그리드 아이템 */
+.main-grid-item {
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 2px solid #000; /* 경계선 색 추가 */
     border-radius: 5px;
     text-align: center;
 }
 
+.item1 {
+    background-color: #f9f9f9;
+}
+
+.item2 {
+    background-color: #e9f7fd;
+}
+
+.item3 {
+    background-color: #fce4ec;
+}
+
+.item4 {
+    background-color: #e8f5e9;
+}
+
+/* 로그인 */
 .login {
-    flex: 1;
+    flex: 1.5; /* 15% 비중 */
     padding: 20px;
     background-color: #e0e0e0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    height: 100%;
+    height: 30%; /* 세로 길이 70% 줄임 */
+    margin-left: 20px; /* 로그인 영역을 중앙 콘텐츠와 분리 */
 }
 
 .login-container {
@@ -94,14 +113,12 @@ nav ul.navbar li a:hover {
 }
 
 .login-container .form-group input {
-    width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
 .login-container .form-group button {
-    width: 100%;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -109,8 +126,90 @@ nav ul.navbar li a:hover {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    width: 40%; /* 버튼 크기 조정 */
+    margin-right: 5px; /* 버튼 간격 조정 */
 }
 
 .login-container .form-group button:hover {
     background-color: #45a049;
+}
+
+/* 보드 */
+.board {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.board-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.board-table th, .board-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.board-table th {
+    background-color: #f2f2f2;
+}
+
+.title-column {
+    width: 40%;
+}
+
+.button-area {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.button-area button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-area button:hover {
+    background-color: #45a049;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.pagination .current span {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
 }
