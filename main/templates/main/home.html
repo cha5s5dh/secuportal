@@ -5,20 +5,16 @@
 {% block content %}
     <div class="functions">
         <div class="function">
-            <h2>Function1</h2>
-            <p>Content for Function1</p>
+            <h2><a href="{% url 'security_info' %}">보안정보</a></h2>
         </div>
         <div class="function">
-            <h2>Function2</h2>
-            <p>Content for Function2</p>
+            <h2><a href="{% url 'function2' %}">기능2</a></h2>
         </div>
         <div class="function">
-            <h2>Function3</h2>
-            <p>Content for Function3</p>
+            <h2><a href="{% url 'function3' %}">기능3</a></h2>
         </div>
         <div class="function">
-            <h2>Function4</h2>
-            <p>Content for Function4</p>
+            <h2><a href="{% url 'function4' %}">기능4</a></h2>
         </div>
     </div>
 {% endblock %}

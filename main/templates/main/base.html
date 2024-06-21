@@ -1,29 +1,31 @@
+<!-- main/templates/main/base.html -->
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Security Portal</title>
+    <title>정보보안 포털</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
 </head>
 <body>
     <header>
+        <h1>정보보안 포털</h1>
         <nav>
             <ul class="navbar">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'function1' %}">Function1</a></li>
-                <li><a href="{% url 'function2' %}">Function2</a></li>
-                <li><a href="{% url 'function3' %}">Function3</a></li>
-                <li><a href="{% url 'function4' %}">Function4</a></li>
+                <li><a href="{% url 'home' %}">홈</a></li>
+                <li><a href="{% url 'security_info' %}">보안정보</a></li>
+                <li><a href="{% url 'function2' %}">기능2</a></li>
+                <li><a href="{% url 'function3' %}">기능3</a></li>
+                <li><a href="{% url 'function4' %}">기능4</a></li>
             </ul>
         </nav>
     </header>
     <div class="container">
+        <div class="sidebar">
+            <!-- 좌측 세로 영역 -->
+        </div>
         <div class="content">
             {% block content %}{% endblock %}
-        </div>
-        <div class="login">
-            <h2>Login</h2>
-            <!-- Login form goes here -->
         </div>
     </div>
 </body>

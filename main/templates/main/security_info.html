@@ -1,0 +1,29 @@
+<!-- main/templates/main/security_info.html -->
+
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="function-detail">
+        <h2>보안정보 게시판</h2>
+        <table>
+            <tr>
+                <th>넘버링</th>
+                <th>카테고리</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>시간</th>
+                <th>조회수</th>
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.number }}</td>
+                <td>{{ post.category }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.created_at }}</td>
+                <td>{{ post.views }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
