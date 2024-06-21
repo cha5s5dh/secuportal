@@ -7,31 +7,35 @@
         <p>test</p>
     </div>
     <div class="function-detail">
-        <h2>보안정보 게시판</h2>
+        <h2>Security Information Board</h2>
         <div class="bottom-area">
             <table>
-                <tr>
-                    <th>넘버링</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>시간</th>
-                    <th>조회수</th>
-                </tr>
-                {% for post in posts %}
-                <tr>
-                    <td>{{ post.number }}</td>
-                    <td>{{ post.category }}</td>
-                    <td>{{ post.title }}</td>
-                    <td>{{ post.author }}</td>
-                    <td>{{ post.created_at }}</td>
-                    <td>{{ post.views }}</td>
-                </tr>
-                {% endfor %}
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Time</th>
+                        <th>Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.number }}</td>
+                        <td>{{ post.category }}</td>
+                        <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.created_at }}</td>
+                        <td>{{ post.views }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
-        <div class="additional-area">
-            <!-- 추가 영역 내용 -->
+        <div class="button-area">
+            <button onclick="location.href='{% url 'post_create' %}'">Create Post</button>
         </div>
     </div>
 {% endblock %}

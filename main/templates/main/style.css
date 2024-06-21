@@ -58,7 +58,7 @@ nav ul.navbar li a:hover {
 }
 
 .content {
-    flex: 1; /* 화면의 반절로 맞춤 */
+    flex: 2; /* 전체 크기 증가 */
     padding: 20px;
     background-color: white;
     border: 1px solid #ddd;
@@ -84,7 +84,7 @@ nav ul.navbar li a:hover {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    height: 70vh; /* 보안정보 게시판 영역 크기 설정 */
+    height: 60vh;
     display: flex;
     flex-direction: column;
 }
@@ -100,10 +100,13 @@ nav ul.navbar li a:hover {
     overflow-y: auto;
 }
 
-.function-detail .additional-area {
-    flex: 1;
-    border-top: 1px solid #ddd;
-    margin-top: 10px;
+.additional-area {
+    height: 20vh;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 20px;
 }
 
 h2 {
@@ -125,11 +128,20 @@ th, td {
     text-align: left;
 }
 
-.login {
-    flex: 1;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
+.button-area {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.button-area button {
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
     border-radius: 5px;
-    margin-left: 20px;
+    cursor: pointer;
+}
+
+.button-area button:hover {
+    background-color: #555;
 }
