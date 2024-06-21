@@ -46,6 +46,7 @@ nav ul.navbar li a:hover {
 .container {
     display: flex;
     margin: 20px;
+    height: calc(100vh - 60px); /* 헤더를 제외한 화면 높이 */
 }
 
 .sidebar {
@@ -55,6 +56,7 @@ nav ul.navbar li a:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-right: 20px;
+    height: 100%;
 }
 
 .content {
@@ -63,6 +65,19 @@ nav ul.navbar li a:hover {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.grid-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .login {
@@ -71,85 +86,31 @@ nav ul.navbar li a:hover {
     background-color: #e0e0e0;
     border: 1px solid #ddd;
     border-radius: 5px;
+    height: 100%;
 }
 
-.board {
-    width: 80%;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    height: auto; /* 세로로 길게 설정 */
-}
-
-.board h2 {
+.login-container {
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.board-table {
-    width: 100%;
-    border-collapse: collapse;
+.login-container .form-group {
+    margin-bottom: 15px;
 }
 
-.board-table th, .board-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.board-table th {
-    background-color: #f2f2f2;
-}
-
-.button-area {
-    text-align: right;
-    margin-top: 20px;
-}
-
-.button-area button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.button-area button:hover {
-    background-color: #45a049;
-}
-
-.form-container {
-    width: 50%;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-container label {
+.login-container .form-group label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.form-container input, .form-container textarea {
+.login-container .form-group input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-.form-container button {
+.login-container .form-group button {
     width: 100%;
     padding: 10px;
     background-color: #4CAF50;
@@ -159,6 +120,6 @@ nav ul.navbar li a:hover {
     cursor: pointer;
 }
 
-.form-container button:hover {
+.login-container .form-group button:hover {
     background-color: #45a049;
 }

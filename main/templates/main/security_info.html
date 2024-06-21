@@ -1,4 +1,3 @@
-<!-- main/templates/main/security_info.html -->
 {% extends 'main/base_security.html' %}
 
 {% block content %}
@@ -16,11 +15,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for post in posts %}
+                {% for post in page_obj %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ post.category }}</td>
-                    <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
+                    <td class="title-column"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
                     <td>{{ post.author }}</td>
                     <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
                     <td>{{ post.views }}</td>
@@ -31,11 +30,26 @@
         <div class="button-area">
             <button onclick="location.href='{% url 'post_create' %}'">게시글 작성</button>
         </div>
-    </div>
-{% endblock %}
-
-{% block additional_content %}
-    <div class="additional-content">
-        <p>추가 콘텐츠</p>
+        <div class="pagination">
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page=1">&laquo; 처음</a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}">&lsaquo; 이전</a></li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="current"><span>{{ num }}</span></li>
+                        {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                            <li><a href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}">다음 &rsaquo;</a></li>
+                        <li><a href="?page={{ page_obj.paginator.num_pages }}">마지막 &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
