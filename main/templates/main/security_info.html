@@ -1,17 +1,18 @@
-{% extends 'main/base.html' %}
+<!-- main/templates/main/security_info.html -->
+{% extends 'main/base_security.html' %}
 
 {% block content %}
     <div class="board">
-        <h2>Security Information Board</h2>
+        <h2>보안정보 게시판</h2>
         <table class="board-table">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Date</th>
-                    <th>Views</th>
+                    <th>번호</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성 시간</th>
+                    <th>조회수</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +29,13 @@
             </tbody>
         </table>
         <div class="button-area">
-            <button onclick="location.href='{% url 'post_create' %}'">Create Post</button>
+            <button onclick="location.href='{% url 'post_create' %}'">게시글 작성</button>
         </div>
+    </div>
+{% endblock %}
+
+{% block additional_content %}
+    <div class="additional-content">
+        <p>추가 콘텐츠</p>
     </div>
 {% endblock %}
