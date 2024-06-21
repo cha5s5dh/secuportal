@@ -54,10 +54,11 @@ nav ul.navbar li a:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-right: 20px;
+    height: 100vh; /* 세로 영역 크기 설정 */
 }
 
 .content {
-    flex: 3;
+    flex: 1; /* 화면의 반절로 맞춤 */
     padding: 20px;
     background-color: white;
     border: 1px solid #ddd;
@@ -83,6 +84,26 @@ nav ul.navbar li a:hover {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    height: 70vh; /* 보안정보 게시판 영역 크기 설정 */
+    display: flex;
+    flex-direction: column;
+}
+
+.function-detail .top-area {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.function-detail .bottom-area {
+    flex: 3;
+    overflow-y: auto;
+}
+
+.function-detail .additional-area {
+    flex: 1;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 h2 {
@@ -102,4 +123,13 @@ table, th, td {
 th, td {
     padding: 8px;
     text-align: left;
+}
+
+.login {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 20px;
 }
