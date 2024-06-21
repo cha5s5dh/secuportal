@@ -1,39 +1,32 @@
-<!-- main/templates/main/security_info.html -->
-
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <div class="top-area">
-        <p>test</p>
-    </div>
-    <div class="function-detail">
+    <div class="board">
         <h2>Security Information Board</h2>
-        <div class="bottom-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Number</th>
-                        <th>Category</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Time</th>
-                        <th>Views</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for post in posts %}
-                    <tr>
-                        <td>{{ post.number }}</td>
-                        <td>{{ post.category }}</td>
-                        <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
-                        <td>{{ post.author }}</td>
-                        <td>{{ post.created_at }}</td>
-                        <td>{{ post.views }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <table class="board-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ post.category }}</td>
+                    <td><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ post.views }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         <div class="button-area">
             <button onclick="location.href='{% url 'post_create' %}'">Create Post</button>
         </div>
