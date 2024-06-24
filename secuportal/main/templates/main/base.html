@@ -22,6 +22,20 @@
                         <a class="nav-link" href="{% url 'board' %}">보안 게시판</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ user.username }}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">회원가입</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">로그인</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </header>

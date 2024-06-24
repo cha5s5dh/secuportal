@@ -6,6 +6,7 @@ body {
 
 header {
     border: 1px solid red;
+    padding: 10px 0;
 }
 
 main {
@@ -26,7 +27,6 @@ main {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    width: 75%; /* 중앙 영역의 너비 조정 */
 }
 
 .content-area {
@@ -52,21 +52,35 @@ main {
     text-decoration: none;
 }
 
-.col-md-12 {
-    max-width: 100%;
-}
-
 .row {
     display: flex;
     flex-wrap: nowrap;
 }
 
 .col-md-2 {
-    flex: 0 0 20%;
-    max-width: 20%;
+    flex: 0 0 25%; /* 원래 20%에서 25%로 조정 */
+    max-width: 25%;
 }
 
 .col-md-10 {
-    flex: 0 0 80%;
-    max-width: 80%;
+    flex: 0 0 75%; /* 원래 80%에서 75%로 조정 */
+    max-width: 75%;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa; /* 밝은 배경색으로 변경 */
+    color: #000; /* 어두운 글씨 색으로 변경 */
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+.main-content {
+    margin-top: 40px; /* mt-4 클래스 대신 */
+    padding: 20px;
 }

@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from .models import Post
+from .models import Post, Category
 from ckeditor.widgets import CKEditorWidget
+
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
@@ -23,9 +24,16 @@ class SignUpForm(forms.ModelForm):
         if password != confirm_password:
             self.add_error('confirm_password', "비밀번호가 일치하지 않습니다.")
 
-class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())
+from django import forms
+from .models import Post, Category  # Category 모델을 임포트합니다
 
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['category', 'title', 'author', 'content']
+        fields = ['category', 'title', 'author', 'content', 'attachment']
+
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, label="카테고리")
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="제목")
+    author = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="작성자")
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), label="내용")
+    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}), required=False, label="파일 첨부")
