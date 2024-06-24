@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    border: 1px solid red;
+}
+
+main {
+    padding: 20px;
+    min-height: 1000px;
+}
+
+.main-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.left-sidebar, .right-sidebar {
+    padding: 10px;
+}
+
+.main-area {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 75%; /* 중앙 영역의 너비 조정 */
+}
+
+.content-area {
+    border: 1px solid red;
+    padding: 10px;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-links a, .page-links strong {
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+.col-md-12 {
+    max-width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.col-md-2 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.col-md-10 {
+    flex: 0 0 80%;
+    max-width: 80%;
+}
