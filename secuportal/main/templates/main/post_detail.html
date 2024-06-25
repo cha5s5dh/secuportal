@@ -53,7 +53,7 @@
                             <tbody>
                                 {% for p in posts %}
                                 <tr>
-                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ total_posts|add:"-forloop.counter" }}</td>
                                     <td>{{ p.category.name }}</td>
                                     <td>
                                         <a href="{% url 'post_detail' p.id %}">

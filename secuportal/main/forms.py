@@ -1,8 +1,8 @@
-from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from .models import Post, Category
 from ckeditor.widgets import CKEditorWidget
+from django import forms
+from .models import Post, Category  # Category 모델을 임포트합니다
 
 
 class SignUpForm(forms.ModelForm):
@@ -24,8 +24,7 @@ class SignUpForm(forms.ModelForm):
         if password != confirm_password:
             self.add_error('confirm_password', "비밀번호가 일치하지 않습니다.")
 
-from django import forms
-from .models import Post, Category  # Category 모델을 임포트합니다
+
 
 class PostForm(forms.ModelForm):
     class Meta:

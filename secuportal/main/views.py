@@ -6,13 +6,13 @@ from .forms import SignUpForm, PostForm
 from .models import Post, Category
 
 def index(request):
-    posts = Post.objects.all().order_by('-created_at')[:5]
+    posts = Post.objects.all().order_by('created_at')[:5]
     categories = Category.objects.all()
     return render(request, 'main/index.html', {'posts': posts, 'categories': categories})
 
 def board(request):
     category_id = request.GET.get('category', None)
-    posts = Post.objects.all().order_by('-created_at')
+    posts = Post.objects.all().order_by('created_at')
     if category_id:
         posts = posts.filter(category_id=category_id)
     
@@ -57,7 +57,7 @@ def post_detail(request, post_id):
     post.views += 1
     post.save()
     categories = Category.objects.all()
-    posts = Post.objects.all().order_by('-created_at')
+    posts = Post.objects.all().order_by('created_at')
     paginator = Paginator(posts, 15)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
