@@ -6,13 +6,16 @@
 {% block content %}
 <div class="main-content container mt-4">
     <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3>카테고리</h3>
+        <div class="col-md-2"> <!-- 카테고리 영역을 2로 줄임 -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">카테고리</h5>
                 </div>
                 <div class="card-body">
-                    <ul class="list-group">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'board' %}">모아보기</a>
+                        </li>
                         {% for category in categories %}
                         <li class="list-group-item">
                             <a href="{% url 'board' %}?category={{ category.id }}">{{ category.name }}</a>
@@ -22,76 +25,90 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">
-                    <h2>{{ post.title }}</h2>
+        <div class="col-md-10"> <!-- 게시판 영역을 10으로 늘림 -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">{{ post.category.name }}</h2>
                 </div>
                 <div class="card-body">
-                    <div class="content-area">
-                        <p><strong>카테고리:</strong> {{ post.category.name }} | <strong>작성자:</strong> {{ post.author }} | <strong>작성일:</strong> {{ post.created_at|date:"Y-m-d H:i" }} | <strong>조회수:</strong> {{ post.views }}</p>
-                        {% if post.attachment %}
-                        <p><strong>첨부파일:</strong> <a href="{{ post.attachment.url }}" download>{{ post.attachment.name }}</a></p>
-                        {% endif %}
-                        <hr>
-                        <div>
-                            {{ post.content|safe }}
-                        </div>
+                    <div class="mb-2">
+                        <span><strong>카테고리:</strong> {{ post.category.name }}</span> |
+                        <span><strong>작성자:</strong> {{ post.author }}</span> |
+                        <span><strong>작성일:</strong> {{ post.created_at|date:"Y-m-d H:i" }}</span> |
+                        <span><strong>조회수:</strong> {{ post.views }}</span>
                     </div>
-                    <div class="content-area mt-4">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>번호</th>
-                                    <th>카테고리</th>
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>시간</th>
-                                    <th>조회수</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for p in posts %}
-                                <tr>
-                                    <td>{{ total_posts|add:"-forloop.counter" }}</td>
-                                    <td>{{ p.category.name }}</td>
-                                    <td>
-                                        <a href="{% url 'post_detail' p.id %}">
-                                            {{ p.title }}
-                                            {% if p.attachment %}
-                                            <img src="{% static 'images/attachment.png' %}" alt="첨부파일" style="width: 16px; height: 16px;">
-                                            {% endif %}
-                                        </a>
-                                    </td>
-                                    <td>{{ p.author }}</td>
-                                    <td>{{ p.created_at|date:"Y-m-d H:i" }}</td>
-                                    <td>{{ p.views }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <div class="pagination justify-content-center">
-                            <div class="page-links">
-                                {% if posts.has_previous %}
-                                    <a class="btn btn-secondary" href="?page=1">&laquo; 처음</a>
-                                    <a class="btn btn-secondary" href="?page={{ posts.previous_page_number }}">이전</a>
-                                {% endif %}
+                    {% if post.attachment %}
+                    <div class="mb-3">
+                        <strong>첨부파일:</strong> 
+                        <a href="{{ post.attachment.url }}" download>
+                            <img src="{% static 'images/attachment.png' %}" alt="첨부파일" style="width: 16px; height: 16px;">
+                            {{ post.attachment.name }}
+                        </a>
+                    </div>
+                    {% endif %}
+                    <hr>
+                    <div class="post-content">
+                        {{ post.content|safe }}
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">관련 게시물</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>번호</th>
+                                <th>카테고리</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>시간</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in posts %}
+                            <tr>
+                                <td>{{ total_posts|add:"-forloop.counter" }}</td>
+                                <td>{{ p.category.name }}</td>
+                                <td>
+                                    <a href="{% url 'post_detail' p.id %}">
+                                        {{ p.title }}
+                                        {% if p.attachment %}
+                                        <img src="{% static 'images/attachment.png' %}" alt="첨부파일" style="width: 16px; height: 16px;">
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>{{ p.author }}</td>
+                                <td>{{ p.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>{{ p.views }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="pagination justify-content-center">
+                        <div class="page-links">
+                            {% if posts.has_previous %}
+                                <a class="btn btn-secondary" href="?page=1">&laquo; 처음</a>
+                                <a class="btn btn-secondary" href="?page={{ posts.previous_page_number }}">이전</a>
+                            {% endif %}
 
-                                {% for num in posts.paginator.page_range %}
-                                    {% if posts.number == num %}
-                                        <strong class="btn btn-primary">{{ num }}</strong>
-                                    {% elif num > posts.number|add:-5 and num < posts.number|add:5 %}
-                                        <a class="btn btn-secondary" href="?page={{ num }}">{{ num }}</a>
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% if posts.has_next %}
-                                    <a class="btn btn-secondary" href="?page={{ posts.next_page_number }}">다음</a>
-                                    <a class="btn btn-secondary" href="?page={{ posts.paginator.num_pages }}">&raquo; 마지막</a>
+                            {% for num in posts.paginator.page_range %}
+                                {% if posts.number == num %}
+                                    <strong class="btn btn-primary">{{ num }}</strong>
+                                {% elif num > posts.number|add:-5 and num < posts.number|add:5 %}
+                                    <a class="btn btn-secondary" href="?page={{ num }}">{{ num }}</a>
                                 {% endif %}
-                            </div>
-                            <button class="btn btn-success ml-auto" onclick="location.href='{% url 'create_post' %}'">글 작성</button>
+                            {% endfor %}
+
+                            {% if posts.has_next %}
+                                <a class="btn btn-secondary" href="?page={{ posts.next_page_number }}">다음</a>
+                                <a class="btn btn-secondary" href="?page={{ posts.paginator.num_pages }}">&raquo; 마지막</a>
+                            {% endif %}
                         </div>
+                        <button class="btn btn-success ml-auto" onclick="location.href='{% url 'create_post' category_id=post.category.id %}'">글 작성</button>
                     </div>
                 </div>
             </div>

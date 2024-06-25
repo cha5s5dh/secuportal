@@ -1,86 +1,32 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    border: 1px solid red;
-    padding: 10px 0;
-}
-
-main {
-    padding: 20px;
-    min-height: 1000px;
-}
-
-.main-wrapper {
-    display: flex;
-    height: 100%;
-}
-
-.left-sidebar, .right-sidebar {
-    padding: 10px;
-}
-
-.main-area {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-area {
-    border: 1px solid red;
-    padding: 10px;
-    flex: 1;
-    box-sizing: border-box;
-}
-
-.table {
-    margin-bottom: 0;
-}
-
-.pagination {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.page-links a, .page-links strong {
-    margin: 0 5px;
-    text-decoration: none;
-}
-
-.row {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.col-md-2 {
-    flex: 0 0 25%; /* 원래 20%에서 25%로 조정 */
-    max-width: 25%;
-}
-
-.col-md-10 {
-    flex: 0 0 75%; /* 원래 80%에서 75%로 조정 */
-    max-width: 75%;
+    background-color: #f8f9fa;
 }
 
 .card {
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .card-header {
-    background-color: #f8f9fa; /* 밝은 배경색으로 변경 */
-    color: #000; /* 어두운 글씨 색으로 변경 */
+    background-color: #007bff;
+    color: white;
 }
 
-.card-body {
-    background-color: #fff;
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
-.main-content {
-    margin-top: 40px; /* mt-4 클래스 대신 */
-    padding: 20px;
+.pagination .btn {
+    margin: 0 2px;
+}
+
+.btn-success.ml-auto {
+    float: right;
+}
+
+.post-content {
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }

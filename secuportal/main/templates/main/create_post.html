@@ -1,12 +1,56 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}글 작성{% endblock %}
 
 {% block content %}
-<h2>글 작성</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">저장</button>
-</form>
+<div class="main-content container mt-4">
+    <div class="row">
+        <div class="col-md-2"> <!-- 카테고리 영역을 2로 줄임 -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">카테고리</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'board' %}">모아보기</a>
+                        </li>
+                        {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="{% url 'board' %}?category={{ category.id }}">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10"> <!-- 게시판 영역을 10으로 늘림 -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">{{ category.name }} - 글 작성</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_title">제목:</label>
+                            {{ form.title }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_content">내용:</label>
+                            {{ form.content }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_attachment">파일 첨부:</label>
+                            {{ form.attachment }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">저장</button>
+                        <a href="{% url 'board' %}?category={{ category.id }}" class="btn btn-secondary">취소</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

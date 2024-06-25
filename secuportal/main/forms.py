@@ -29,7 +29,7 @@ class SignUpForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['category', 'title', 'author', 'content', 'attachment']
+        fields = ['category', 'title', 'content', 'attachment']
 
     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, label="카테고리")
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="제목")
