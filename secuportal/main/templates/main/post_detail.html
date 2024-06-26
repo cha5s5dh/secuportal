@@ -6,7 +6,7 @@
 {% block content %}
 <div class="main-content container mt-4">
     <div class="row">
-        <div class="col-md-2"> <!-- 카테고리 영역을 2로 줄임 -->
+        <div class="col-md-2">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">카테고리</h5>
@@ -14,47 +14,45 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{% url 'board' %}">모아보기</a>
+                            <a href="{% if category_type == 'board' %}{% url 'board' %}{% else %}{% url 'security_news' %}{% endif %}">모아보기</a>
                         </li>
                         {% for category in categories %}
                         <li class="list-group-item">
-                            <a href="{% url 'board' %}?category={{ category.id }}">{{ category.name }}</a>
+                            <a href="{% if category_type == 'board' %}{% url 'board' %}?category={{ category.id }}{% else %}{% url 'security_news' %}?category={{ category.id }}{% endif %}">{{ category.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-10"> <!-- 게시판 영역을 10으로 늘림 -->
+        <div class="col-md-10">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="mb-0">{{ post.category.name }}</h2>
+                    <h2 class="mb-0">{{ post.title }}</h2>
                 </div>
                 <div class="card-body">
-                    <div class="mb-2">
-                        <span><strong>카테고리:</strong> {{ post.category.name }}</span> |
-                        <span><strong>작성자:</strong> {{ post.author }}</span> |
-                        <span><strong>작성일:</strong> {{ post.created_at|date:"Y-m-d H:i" }}</span> |
-                        <span><strong>조회수:</strong> {{ post.views }}</span>
+                    <div class="content-area">
+                        <p><strong>카테고리:</strong> {{ post.category.name }} | <strong>작성자:</strong> {{ post.author }} | <strong>작성일:</strong> {{ post.created_at|date:"Y-m-d H:i" }} | <strong>수정일:</strong> {{ post.updated_at|date:"Y-m-d H:i" }} | <strong>조회수:</strong> {{ post.views }}</p>
+                        {% if post.attachment %}
+                        <p><strong>첨부파일:</strong> <a href="{{ post.attachment.url }}" download>{{ post.attachment.name }}</a></p>
+                        {% endif %}
+                        <hr>
+                        <div>
+                            {{ post.content|safe }}
+                        </div>
                     </div>
-                    {% if post.attachment %}
-                    <div class="mb-3">
-                        <strong>첨부파일:</strong> 
-                        <a href="{{ post.attachment.url }}" download>
-                            <img src="{% static 'images/attachment.png' %}" alt="첨부파일" style="width: 16px; height: 16px;">
-                            {{ post.attachment.name }}
-                        </a>
-                    </div>
-                    {% endif %}
-                    <hr>
-                    <div class="post-content">
-                        {{ post.content|safe }}
+                    <div class="content-area mt-4">
+                        {% if user.is_authenticated and user.username == post.author %}
+                        <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">수정</a>
+                        <a href="{% url 'delete_post' post.id %}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="card shadow-sm">
+            <!-- 하단의 게시글 목록 -->
+            <div class="card shadow-sm mt-4">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">관련 게시물</h5>
+                    <h5 class="mb-0">게시글 목록</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
@@ -71,7 +69,7 @@
                         <tbody>
                             {% for p in posts %}
                             <tr>
-                                <td>{{ total_posts|add:"-forloop.counter" }}</td>
+                                <td>{{ forloop.revindex }}</td>
                                 <td>{{ p.category.name }}</td>
                                 <td>
                                     <a href="{% url 'post_detail' p.id %}">
@@ -91,21 +89,21 @@
                     <div class="pagination justify-content-center">
                         <div class="page-links">
                             {% if posts.has_previous %}
-                                <a class="btn btn-secondary" href="?page=1">&laquo; 처음</a>
-                                <a class="btn btn-secondary" href="?page={{ posts.previous_page_number }}">이전</a>
+                                <a class="btn btn-secondary" href="?page=1{% if category_type == 'board' %}&category={{ post.category.id }}{% else %}&category={{ post.category.id }}{% endif %}">&laquo; 처음</a>
+                                <a class="btn btn-secondary" href="?page={{ posts.previous_page_number }}{% if category_type == 'board' %}&category={{ post.category.id }}{% else %}&category={{ post.category.id }}{% endif %}">이전</a>
                             {% endif %}
 
                             {% for num in posts.paginator.page_range %}
                                 {% if posts.number == num %}
                                     <strong class="btn btn-primary">{{ num }}</strong>
                                 {% elif num > posts.number|add:-5 and num < posts.number|add:5 %}
-                                    <a class="btn btn-secondary" href="?page={{ num }}">{{ num }}</a>
+                                    <a class="btn btn-secondary" href="?page={{ num }}{% if category_type == 'board' %}&category={{ post.category.id }}{% else %}&category={{ post.category.id }}{% endif %}">{{ num }}</a>
                                 {% endif %}
                             {% endfor %}
 
                             {% if posts.has_next %}
-                                <a class="btn btn-secondary" href="?page={{ posts.next_page_number }}">다음</a>
-                                <a class="btn btn-secondary" href="?page={{ posts.paginator.num_pages }}">&raquo; 마지막</a>
+                                <a class="btn btn-secondary" href="?page={{ posts.next_page_number }}{% if category_type == 'board' %}&category={{ post.category.id }}{% else %}&category={{ post.category.id }}{% endif %}">다음</a>
+                                <a class="btn btn-secondary" href="?page={{ posts.paginator.num_pages }}{% if category_type == 'board' %}&category={{ post.category.id }}{% else %}&category={{ post.category.id }}{% endif %}">마지막 &raquo;</a>
                             {% endif %}
                         </div>
                         <button class="btn btn-success ml-auto" onclick="location.href='{% url 'create_post' category_id=post.category.id %}'">글 작성</button>

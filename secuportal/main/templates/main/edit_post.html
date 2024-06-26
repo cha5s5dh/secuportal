@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}글 작성{% endblock %}
+{% block title %}글 수정{% endblock %}
 
 {% block content %}
 <div class="main-content container mt-4">
@@ -14,11 +14,11 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{% if category.type == 'board' %}{% url 'board' %}{% else %}{% url 'security_news' %}{% endif %}">모아보기</a>
+                            <a href="{% if post.category.type == 'board' %}{% url 'board' %}{% else %}{% url 'security_news' %}{% endif %}">모아보기</a>
                         </li>
                         {% for cat in categories %}
                         <li class="list-group-item">
-                            <a href="{% if category.type == 'board' %}{% url 'board' %}?category={{ cat.id }}{% else %}{% url 'security_news' %}?category={{ cat.id }}{% endif %}">{{ cat.name }}</a>
+                            <a href="{% if post.category.type == 'board' %}{% url 'board' %}?category={{ cat.id }}{% else %}{% url 'security_news' %}?category={{ cat.id }}{% endif %}">{{ cat.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -28,7 +28,7 @@
         <div class="col-md-10"> <!-- 게시판 영역을 10으로 늘림 -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="mb-0">{{ category.name }} - 글 작성</h2>
+                    <h2 class="mb-0">{{ post.category.name }} - 글 수정</h2>
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
@@ -46,7 +46,7 @@
                             {{ form.attachment }}
                         </div>
                         <button type="submit" class="btn btn-primary">저장</button>
-                        <a href="{% if category.type == 'board' %}{% url 'board' %}?category={{ category.id }}{% else %}{% url 'security_news' %}?category={{ category.id }}{% endif %}" class="btn btn-secondary">취소</a>
+                        <a href="{% if post.category.type == 'board' %}{% url 'board' %}?category={{ post.category.id }}{% else %}{% url 'security_news' %}?category={{ post.category.id }}{% endif %}" class="btn btn-secondary">취소</a>
                     </form>
                 </div>
             </div>

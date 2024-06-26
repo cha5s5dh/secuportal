@@ -21,11 +21,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'board' %}">보안 게시판</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'security_news' %}">보안뉴스</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

@@ -26,13 +26,18 @@ class SignUpForm(forms.ModelForm):
 
 
 
+# class PostForm(forms.ModelForm):
+#     class Meta:
+#         model = Post
+#         fields = ['category', 'title', 'content', 'attachment']
+
+#     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, label="카테고리")
+#     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="제목")
+#     author = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="작성자")
+#     content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), label="내용")
+#     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}), required=False, label="파일 첨부")
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['category', 'title', 'content', 'attachment']
-
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, label="카테고리")
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="제목")
-    author = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label="작성자")
-    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}), label="내용")
-    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}), required=False, label="파일 첨부")
+        fields = ['title', 'content', 'attachment']

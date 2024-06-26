@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}보안 게시판{% endblock %}
+{% block title %}보안 뉴스{% endblock %}
 
 {% block content %}
 <div class="main-content container mt-4">
@@ -14,11 +14,11 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{% url 'board' %}">모아보기</a>
+                            <a href="{% url 'security_news' %}">모아보기</a>
                         </li>
                         {% for category in categories %}
                         <li class="list-group-item">
-                            <a href="{% url 'board' %}?category={{ category.id }}">{{ category.name }}</a>
+                            <a href="{% url 'security_news' %}?category={{ category.id }}">{{ category.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -45,7 +45,7 @@
                         <tbody>
                             {% for post in posts %}
                             <tr>
-                                <td>{{ forloop.revindex }}</td>
+                                <td>{{ total_posts|add:"-forloop.counter" }}</td>
                                 <td>{{ post.category.name }}</td>
                                 <td>
                                     <a href="{% url 'post_detail' post.id %}">
