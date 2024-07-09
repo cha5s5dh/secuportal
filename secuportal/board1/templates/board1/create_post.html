@@ -1,0 +1,27 @@
+{% extends "board_base.html" %}
+
+{% block content %}
+<div class="left-nav">
+    <ul>
+        <li><a href="{% url 'board1_index' %}">모아보기</a></li>
+        <li><a href="{% url 'post_list' 'temp1' %}">보안뉴스</a></li>
+        <li><a href="{% url 'post_list' 'temp2' %}">보안가이드</a></li>
+        <li><a href="{% url 'post_list' 'temp3' %}">임시3</a></li>
+        <li><a href="{% url 'post_list' 'temp4' %}">임시4</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="grid-item" style="height: auto; width: 1200px;">
+        <h2>{{ category }} 글 작성</h2>
+        <form method="post" class="form-container" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="category" value="{{ category_key }}">
+            <div class="btn-container">
+                <button type="submit">작성하기</button>
+                <button type="button" onclick="window.history.back()">돌아가기</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

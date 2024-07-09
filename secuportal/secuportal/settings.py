@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 from pathlib import Path
 
@@ -20,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)o%jsmwf(z!l=sg1e+%7yvin8t7=^hp&rgivb83zk!xfnlvn+y'
+SECRET_KEY = 'django-insecure-%@2#ypn9@0+_x5ysm+kb+(l)%$4_za)=8w^_ocap%)#3u(!6!1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,14 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
-    'ckeditor',
-    'ckeditor_uploader',
+    'board1',
+    'board2',
 ]
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
-CKEDITOR_UPLOAD_PATH = "uploads/"
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,10 +56,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'secuportal.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'main/templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,8 +73,15 @@ TEMPLATES = [
     },
 ]
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 
 WSGI_APPLICATION = 'secuportal.wsgi.application'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Database
@@ -118,11 +125,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
-LOGIN_URL = 'login'
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -133,10 +135,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_URL = '/static/'
-
-# 앱 내의 static 디렉토리 사용
-STATICFILES_DIRS = [
-    BASE_DIR / "main/static",
-]

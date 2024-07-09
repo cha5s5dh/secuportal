@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecuPortal - Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #18bc9c;
+        }
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        .left-nav {
+            width: 220px;
+            background-color: #34495e;
+            color: #fff;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .left-nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .left-nav ul li {
+            margin: 10px 0;
+        }
+        .left-nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .left-nav ul li a:hover {
+            background-color: #18bc9c;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .grid-item {
+            border: 2px solid #e74c3c;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            border-radius: 8px;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .pagination a.active {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+        }
+        .btn-container button {
+            padding: 10px 20px;
+            background-color: #18bc9c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-container button:hover {
+            background-color: #16a085;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-container div {
+            margin-bottom: 10px;
+        }
+        .form-container label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-container input, .form-container textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #18bc9c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #16a085;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">정보보안포털</a></li>
+            <li><a href="{% url 'board1_index' %}">보안뉴스</a></li>
+            <li><a href="{% url 'board2_index' %}">Board 2</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

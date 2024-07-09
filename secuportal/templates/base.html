@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecuPortal</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>정보보안포털</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'post_list' 'temp1' %}">보안뉴스</a></li>
+                <li><a href="{% url 'post_list' 'temp2' %}">보안가이드</a></li>
+                <li><a href="{% url 'post_list' 'temp3' %}">임시3</a></li>
+                <li><a href="{% url 'post_list' 'temp4' %}">임시4</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 SecuPortal</p>
+    </footer>
+</body>
+</html>

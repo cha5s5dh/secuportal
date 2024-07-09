@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="left-nav">
+        <ul>
+            <li><a href="{% url 'board2_index' %}">모아보기</a></li>
+            <li><a href="#">임시1</a></li>
+            <li><a href="#">임시2</a></li>
+            <li><a href="#">임시3</a></li>
+            <li><a href="#">임시4</a></li>
+        </ul>
+    </div>
+    <div class="grid-container" style="width: 100%;">
+        <div class="grid-item" style="grid-column: span 2; height: 600px;">Board 2 Content</div>
+    </div>
+</div>
+{% endblock %}
