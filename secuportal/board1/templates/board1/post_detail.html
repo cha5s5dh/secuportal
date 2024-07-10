@@ -6,33 +6,37 @@
         <li><a href="{% url 'board1_index' %}">모아보기</a></li>
         <li><a href="{% url 'post_list' 'temp1' %}">보안뉴스</a></li>
         <li><a href="{% url 'post_list' 'temp2' %}">보안가이드</a></li>
-        <li><a href="{% url 'post_list' 'temp3' %}">임시3</a></li>
+        <li><a href="{% url 'post_list' 'temp3' %}">동향 및 정책보고서</a></li>
         <li><a href="{% url 'post_list' 'temp4' %}">임시4</a></li>
     </ul>
 </div>
 <div class="content">
-    <div class="grid-item" style="height: auto; width: 1200px;">
-        <h2>{{ post.title }}</h2>
-        <p><strong>작성자:</strong> {{ post.author }} <strong>작성 시간:</strong> {{ post.created_at|date:"Y-m-d H:i:s" }} <strong>조회수:</strong> {{ post.views }}</p>
+    <div class="grid-item detailed-post" style="width: 1200px;">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <div class="post-meta">
+            <span><strong>작성자:</strong> {{ post.author }}</span>
+            <span><strong>작성 시간:</strong> {{ post.created_at|date:"Y-m-d H:i:s" }}</span>
+            <span><strong>조회수:</strong> {{ post.views }}</span>
+        </div>
         <p><strong>원본 시간:</strong> {{ post.original_time|date:"Y-m-d H:i:s" }}</p>
         {% if post.attachment %}
         <p><strong>첨부파일:</strong> <a href="{{ post.attachment.url }}" download>{{ post.attachment.name }}</a></p>
         {% endif %}
-        <p>{{ post.content }}</p>
-        <form method="post" action="{% url 'delete_post' post.id %}">
-            {% csrf_token %}
-            <div class="btn-container">
+        <div class="post-content">{{ post.content|safe }}</div>
+        <div class="btn-container">
+            <a href="{% url 'edit_post' post.id %}"><button>수정하기</button></a>
+            <form method="post" action="{% url 'delete_post' post.id %}" style="display:inline;">
+                {% csrf_token %}
                 <button type="submit">삭제</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <div class="grid-item" style="height: 800px; width: 1200px; margin-top: 20px;">
         <h3>{{ category_name }} 게시판</h3>
         <table>
             <thead>
                 <tr>
-                    <th>번호</th>
-                    <th>카테고리</th>
+                    <th>분류</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>원본시간</th>
@@ -41,15 +45,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for post in page_obj %}
+                {% for related_post in related_posts %}
                 <tr>
-                    <td>{{ start_index|add:forloop.counter0|add:"-1" }}</td>
-                    <td>{{ post.get_category_display }}</td>
-                    <td><a href="{% url 'post_detail' post.id %}">{{ post.title|truncatechars:20 }}</a></td>
-                    <td>{{ post.author }}</td>
-                    <td>{{ post.original_time|date:"Y-m-d H:i:s" }}</td>
-                    <td>{{ post.created_at|date:"Y-m-d H:i:s" }}</td>
-                    <td>{{ post.views }}</td>
+                    <td>{{ related_post.subcategory }}</td>
+                    <td><a href="{% url 'post_detail' related_post.id %}">{{ related_post.title|truncatechars:20 }}</a></td>
+                    <td>{{ related_post.author }}</td>
+                    <td>{{ related_post.original_time|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ related_post.created_at|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ related_post.views }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

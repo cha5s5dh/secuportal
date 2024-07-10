@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-%@2#ypn9@0+_x5ysm+kb+(l)%$4_za)=8w^_ocap%)#3u(!6!1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'board1',
     'board2',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
-
+CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,6 +80,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # 추가된 부분
 
 WSGI_APPLICATION = 'secuportal.wsgi.application'
 LOGIN_REDIRECT_URL = '/'
@@ -126,11 +129,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
-
+# 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

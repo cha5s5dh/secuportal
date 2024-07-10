@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecuPortal - Board</title>
+    {% load static %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -180,6 +181,7 @@
             background-color: #16a085;
         }
     </style>
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <nav>
@@ -193,5 +195,6 @@
         {% block content %}
         {% endblock %}
     </div>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

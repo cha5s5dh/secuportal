@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="grid-container">
-        <div class="grid-item">Section 1</div>
-        <div class="grid-item">Section 2</div>
-        <div class="grid-item">Section 3</div>
-        <div class="grid-item">Section 4</div>
+<div class="main-content">
+    <div class="container">
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2>보안뉴스</h2>
+                <table class="post-table">
+                    <tbody>
+                        {% for post in latest_posts %}
+                        <tr>
+                            <td><a href="{% url 'post_detail' post.id %}">{{ post.title|truncatechars:20 }}</a></td>
+                            <td>{{ post.created_at|date:"Y-m-d H:i:s" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-item">Section 2</div>
+            <div class="grid-item">Section 3</div>
+            <div class="grid-item">Section 4</div>
+        </div>
     </div>
     <div class="login-container">
         {% if user.is_authenticated %}

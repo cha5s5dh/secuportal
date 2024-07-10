@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
 from django.core.paginator import Paginator
+from django.utils.dateparse import parse_datetime
 
 CATEGORY_NAMES = {
     'temp1': '보안뉴스',
@@ -11,7 +12,7 @@ CATEGORY_NAMES = {
 }
 
 def index(request):
-    latest_posts = Post.objects.order_by('-created_at')[:5]
+    latest_posts = Post.objects.all().order_by('-created_at')[:5]
     return render(request, 'home.html', {
         "latest_posts": latest_posts,
     })
@@ -76,13 +77,27 @@ def create_post(request, category):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             new_post = form.save(commit=False)
-            new_post.category = category
-            new_post.author = "Author 1"  # 예시용으로 작성자 지정
+            new_post.category = category  # URL에서 받은 카테고리 값을 사용
+            new_post.author = "임시 작성자"  # 임시 작성자 지정
+            original_time = form.cleaned_data.get('original_time')
+            if original_time:
+                new_post.original_time = original_time
             new_post.save()
             return redirect('post_list', category=category)
     else:
         form = PostForm()
-    return render(request, 'board1/create_post.html', {"category": CATEGORY_NAMES.get(category, 'Unknown'), "form": form, "category_key": category})
+    return render(request, 'board1/create_post.html', {"form": form, "category_key": category})
+
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'board1/edit_post.html', {"form": form, "post": post})
 
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
